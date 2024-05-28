@@ -8,9 +8,11 @@ import matplotlib.pyplot as plt
 from tqdm import tqdm
 import nltk
 nltk.download('punkt')
+from PerturbDocument import PerturbDocument
+from Pointwise import *
 
 
-class ExplainableSearch:
+class ExplainableSearch(Pointwise):
     # Implementation for paper EXS: Explainable Search Using Local Model Agnostic Interpretability.
     # link: https://arxiv.org/pdf/1809.03857.pdf
 
@@ -189,7 +191,8 @@ class ExplainableSearch:
             raise ValueError('Invalid method.')
         return labels
 
-
+    """
+    inheriting
     def visualize(self, vocabs: np.array, coef: np.array, show_top: int=10, saveto: str='exs.pdf'):
         if len(coef.shape) > 1:  # binary,
             coef = np.squeeze(coef)
@@ -220,3 +223,4 @@ class ExplainableSearch:
         ax.spines['bottom'].set_visible(False)
         ax.spines['left'].set_visible(False)
         fig.savefig(saveto)
+    """

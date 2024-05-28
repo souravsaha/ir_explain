@@ -2,17 +2,21 @@ import operator
 from scipy.stats import entropy, kendalltau,weightedtau
 from sklearn.metrics.pairwise import cosine_similarity
 import pandas as pd
+from PerturbDocument import PerturbDocument
+from Pointwise import *
 
 
 
-
-class Lirme():
+class Lirme(Pointwise):
     def __init__(self, index_path):
-        self.index_path = index_path
+        #self.index_path = index_path
+        super().__init__(index_path)
         #self.index_reader = IndexReader(self.index_path)
+
         #harcoding msmarco index for demo
         self.index_reader = IndexReader.from_prebuilt_index('msmarco-v1-passage-full')
         print("index_reader : ", self.index_reader)
+
         self.sampling_method = "random_words"
         self.top_terms = 10
         self.kernel = [5]
@@ -339,6 +343,8 @@ class Lirme():
 
         return rel_doc_vectors
 
+    """
+    inheriting from Pointwise
     def visualize(self, term_vectors, show_top: int=10, saveto: str='visualization.pdf'):
 
           coef = np.array([x[1]  for x in term_vectors])
@@ -378,4 +384,5 @@ class Lirme():
           ax.spines['bottom'].set_visible(False)
           ax.spines['left'].set_visible(False)
           fig.savefig(saveto)
+    """
 
