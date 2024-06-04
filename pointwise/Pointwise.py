@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 
 class Pointwise():
 
@@ -31,7 +32,7 @@ class Pointwise():
         return tfidf
 
 
-    def compute_relevant_doc_vectors(self, relevant_doc_list):
+    def generate_ground_truth_terms(self, relevant_doc_list):
         """
         relevant_doc_list: list of rel doc-ids for the given query
 
@@ -51,6 +52,8 @@ class Pointwise():
         # normalize the vectors.
         for term in rel_doc_vectors.keys():
             rel_doc_vectors[term] /= len(relevant_doc_list)
+        
+        return rel_doc_vectors
 
 
     def divergence_from_truth(self, rel_vector,  explain_vector):
@@ -174,19 +177,25 @@ class Pointwise():
           neg_y = sorted_coef[:show_top]
           print("neg_y: ", neg_y)
           pos_idx = sorted_idx[-show_top:]
-          #neg_idx = sorted_idx[:show_top]
+          neg_idx = sorted_idx[:show_top]
 
-          #words = np.append(vocabs[pos_idx], vocabs[neg_idx])
-          words = vocabs[pos_idx]
-          #y = np.append(pos_y, neg_y)
-          y = pos_y
+          words = np.append(vocabs[pos_idx], vocabs[neg_idx])
+          #words = vocabs[pos_idx]
+          y = np.append(pos_y, neg_y)
+          #y = pos_y
 
           fig, ax = plt.subplots(figsize=(8, 10))
           colors = ['green' if val >0 else 'red' for val in y]
-          pos = np.arange(len(y)) + .5
+          pos = np.arange(len(y)) #+ .5
           ax.barh(pos, y, align='center', color=colors)
           ax.set_yticks(np.arange(len(y)))
           ax.set_yticklabels(words, fontsize=10)
+          
+          #change x label scale
+          ax.tick_params(axis='x', labelsize=50)
+          #define custom range on x-axis
+          #plt.xlim(-20,15)  
+        
           ax.spines['top'].set_visible(False)
           ax.spines['right'].set_visible(False)
           ax.spines['bottom'].set_visible(False)

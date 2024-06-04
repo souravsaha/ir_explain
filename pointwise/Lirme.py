@@ -1,20 +1,29 @@
+import math
 import operator
 from scipy.stats import entropy, kendalltau,weightedtau
 from sklearn.metrics.pairwise import cosine_similarity
 import pandas as pd
 from PerturbDocument import PerturbDocument
 from Pointwise import *
-
+from pyserini.index.lucene import IndexReader
+import ir_datasets
+import lime
+#upload lime_Ranker,lime_base file from local to installed lime location: /usr/local/lib/python3.10/dist-packages/lime
+#import lime.lime_ranker
+from lime import lime_ranker
+import pandas as pd
 
 
 class Lirme(Pointwise):
     def __init__(self, index_path):
         #self.index_path = index_path
         super().__init__(index_path)
+        
+        #Initialize IndexReader
         #self.index_reader = IndexReader(self.index_path)
-
-        #harcoding msmarco index for demo
-        self.index_reader = IndexReader.from_prebuilt_index('msmarco-v1-passage-full')
+        
+        #harcoding msmarco IndexReader for demo
+        self.index_reader = IndexReader.from_prebuilt_index('msmarco-v1-passage-full')  #added
         print("index_reader : ", self.index_reader)
 
         self.sampling_method = "random_words"
@@ -54,11 +63,12 @@ class Lirme(Pointwise):
 
         return np.mean(scores)
 
-
+    """divergence_from_truth
+    
     def divergence_from_truth(self, rel_vector, explain_vector):
-        """
-        measure divergence of the explanation vector from the rel/non-rel doc-vector
-        """
+        '''
+        #measure divergence of the explanation vector from the rel/non-rel doc-vector
+        '''
         # find the common words in all three vectors.
         pos_all_vect = pd.DataFrame({'rel_vector': rel_vector,
                 'explain_vector': explain_vector}).fillna(0.0001)
@@ -83,11 +93,13 @@ class Lirme(Pointwise):
         '''
 
         return  pos_ent
-
+    """
+    
+    """ divergence_from_truth_cosine
     def divergence_from_truth_cosine(self, rel_vector, explain_vector):
-        """
+        '''
         measure cosine distance of the explanation vector from the rel/non-rel doc-vector
-        """
+        '''
         # find the common words in all three vectors.
         pos_all_vect = pd.DataFrame({'rel_vector': rel_vector,
                 'explain_vector': explain_vector}).fillna(0.0001)
@@ -101,12 +113,12 @@ class Lirme(Pointwise):
                       [pos_all_vect['explain_vector'].values])
 
         return  pos_ent
-
+    """
 
     def correctness(self, doc_id, exp_term_vec, rel_doc_vector):
-        """
+        '''
         exp_term_vec: list of (term, exp_score, tfidf_score)
-        """
+        '''
         ##Correctness : divergence measures
         exp_term_vec_tfidf = {}
         for vec in exp_term_vec:
@@ -126,6 +138,7 @@ class Lirme(Pointwise):
 
 
     #Not being used as of now
+    """ compute_query_document_vectors
     def compute_query_document_vectors(self, qrel_path, index_reader):
         # Read the qrel file
         qrel_object = QRel()
@@ -174,6 +187,7 @@ class Lirme(Pointwise):
 
 
         return qrel_object, query_vectors
+    """
 
     def get_document_vector(self, document_id):
         """
@@ -320,12 +334,32 @@ class Lirme(Pointwise):
         return (explanation_vectors, ranked_lists)
 
 
-    def compute_relevant_doc_vectors(self, relevant_doc_list):
-        """
+    def find_relevant_docs(self, query_id, num_rel_docs=10, dataset_name = "msmarco-passage/trec-dl-hard"):
+        '''
+        '''
+        dataset = ir_datasets.load(dataset_name)
+        
+        rel_docs_list = []
+        for qrel in dataset.qrels_iter():
+            if(qrel.query_id  == query_id and qrel.relevance == 1):
+                print(qrel)
+                rel_docs_list.append(qrel.doc_id)
+
+            if(len(rel_docs_list) >= num_rel_docs  ):
+              break
+        
+        return rel_docs_list
+    
+    def generate_ground_truth_terms(self, relevant_doc_list=None):
+        '''
         relevant_doc_list: list of rel doc-ids for the given query
 
         compute relevant doc vectors for each rel doc: terms with their normalized tfidf values across all rel docs
-        """
+        '''
+        if(relevant_doc_list is None):
+            #how to get query_id (and other params for this function) ?
+            relevant_doc_list = find_relevant_docs(query_id)
+        
         rel_doc_vectors = {}
 
         for doc_id in relevant_doc_list:
