@@ -19,10 +19,10 @@ class Lirme(Pointwise):
         super().__init__(index_path)
         
         #Initialize IndexReader
-        #self.index_reader = IndexReader(self.index_path)
+        self.index_reader = IndexReader(self.index_path)
         
         #harcoding msmarco IndexReader for demo
-        self.index_reader = IndexReader.from_prebuilt_index('msmarco-v1-passage-full')  #added
+        #self.index_reader = IndexReader.from_prebuilt_index('msmarco-v1-passage-full')  #added
         print("index_reader : ", self.index_reader)
 
         self.sampling_method = "random_words"
