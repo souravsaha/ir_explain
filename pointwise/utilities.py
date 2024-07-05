@@ -88,3 +88,45 @@ def compute_explanation_similarity(term_vec1,term_vec2):
     #print("similarity score: ", score)
     return score
 
+def get_occlusion_word_importance_vector(query, doc_text, reranker, doc_score_at_r, words_to_mask=None, remove_stopword=False):
+    """
+    Computes occlusion based term importance
+    words_to_mask: list of words to mask and compute importance. If none, scores for all words are computed
+    """
+    
+    doc_text = doc_text.lower()
+    
+    if(words_to_mask is None):
+        all_words_in_doc = re.findall(r"\b[\w']+\b", doc_text)
+        words_to_mask = list(set(all_words_in_doc))
+    
+    """
+    if(remove_stopword):
+        with open("stop.txt", 'r') as file:
+            # Read the entire content of the file
+            text = file.read()
+            # Split the content into words
+            stopwords = text.split()
+    """
+    modified_docs = []
+    word_freq_dict = {}
+    for word in words_to_mask:
+        #if(remove_stopword and word in stopwords):
+        #    continue
+        
+        # Use regex to remove the word considering word boundaries
+        modified_doc = re.sub(rf'\b{word}\b', '', doc_text, flags=re.IGNORECASE)
+        modified_docs.append(modified_doc)
+        word_freq_dict[word] = len(re.findall(rf'\b{word}\b', doc_text, re.IGNORECASE))
+    
+    rank_scores = PerturbDocument().score_samples_with_reranker(query, modified_docs, reranker)
+    
+    word_change_in_score_dict = dict(zip(words_to_mask, rank_scores))
+    word_imp_score_dict = dict(zip(words_to_mask, doc_score_at_r - rank_scores))
+    
+    for term in word_imp_score_dict.keys():
+        word_imp_score_dict[term] /= word_freq_dict[term]
+    
+    word_imp_score_dict_sorted = sorted(word_imp_score_dict.items(), key=lambda item: item[1], reverse=True)
+    
+    return word_imp_score_dict_sorted
