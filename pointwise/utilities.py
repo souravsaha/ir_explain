@@ -80,7 +80,7 @@ def compute_explanation_similarity(term_vec1,term_vec2):
     num_common_terms = 0
     for term in term_vec1.keys():
         if term in term_vec2.keys():
-            print(term, term_vec1[term] , term_vec2[term])
+            #print(term, term_vec1[term] , term_vec2[term])
             score += abs(term_vec1[term] - term_vec2[term])
             num_common_terms+=1
     
