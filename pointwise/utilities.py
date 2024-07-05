@@ -84,7 +84,7 @@ def compute_explanation_similarity(term_vec1,term_vec2):
             score += abs(term_vec1[term] - term_vec2[term])
             num_common_terms+=1
     
-    num_unique_terms = len(list(set(list(occ_term_vec_norm.keys()) + list(exs_term_vec_norm.keys()))))
+    num_unique_terms = len(list(set(list(term_vec1.keys()) + list(term_vec2.keys()))))
     normalizing_ratio = num_common_terms/num_unique_terms
     
     score = score/normalizing_ratio
