@@ -1,5 +1,6 @@
 import numpy as np
 from scipy.stats import kendalltau
+import re
 
 def get_results_from_index(query, index_searcher, num_docs=10):
     #Perform sparse retrieval to get 'num_docs' number of documents from the index specified by 'index_searcher'
