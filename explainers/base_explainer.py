@@ -1,5 +1,5 @@
 from abc import ABC
-class BaseExplainer():
+class BaseExplainer(ABC):
     def __init__(self, model):
         self.model = model
     
