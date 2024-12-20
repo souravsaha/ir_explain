@@ -7,6 +7,7 @@ class BasePointwiseExplainer(BaseExplainer):
         # super().__init__(model)
         # vs 
         self.model = model
+        self.document_vector = None
 
     def preprocess(self, inputs):
         """ Preprocess inputs specific to pointwise ranking"""
@@ -38,7 +39,7 @@ class BasePointwiseExplainer(BaseExplainer):
             tfidf = {}
             for term, weight in zip(doc, doc_vector):
                 tfidf[term] = weight
-
+            self.document_vector = tfidf
             print(tfidf)
             
             return tfidf
