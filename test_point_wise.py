@@ -1,5 +1,5 @@
 from explainers import LirmePointwiseExplainer
-from explainers import EXSPointwiseExplainer
+# from explainers import EXSPointwiseExplainer
 from visualize import TermVisualization
 from eval import PointWiseCorrectness
 # from metrics import PointWiseConsistency, PointWiseCorrectness
