@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='ir_explain',  # Replace with your project name
+    name='irx',  # Replace with your project name
     version='0.1.0',
     description='A Python Library for Explainable IR methods',
     author='Sourav Saha',
@@ -10,16 +10,17 @@ setup(
     packages=find_packages(),  # Automatically find packages in your project
     install_requires=[
         'ipython==8.12.3',
-        'matplotlib==3.10.0',
+        'matplotlib==3.9.4',
         'nltk==3.9.1',
-        'numpy==2.2.0',
+        'numpy==2.0.2',
         'pandas==2.2.3',
         'rank_bm25==0.2.2',
         'scikit_learn==1.6.0',
         'scipy==1.14.1',
         'sentence_transformers==3.3.1',
-        'skimage==0.0',
+        'scikit-image',
         'torch==2.5.1',
+        'ir_dataset',
         'tqdm==4.67.1'
     ],
     classifiers=[
