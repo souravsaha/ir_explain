@@ -21,3 +21,7 @@ As of now, we have established a single pipeline with pointwise component.
 ### To get started 
 
 You can run the program test_point_wise.py to get the pipeline. 
+
+## Contributing
+
+IR Explain library is open-source, and we are open to all the contributions from IR and NLP community. If you find a bug please report to the issue tracker, even better to send us a pull-request on Github. 
