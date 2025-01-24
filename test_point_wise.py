@@ -1,7 +1,7 @@
 from explainers import LirmePointwiseExplainer
 # from explainers import EXSPointwiseExplainer
 from visualize import TermVisualization
-from eval import PointWiseCorrectness
+from eval import PointWiseCorrectness, PointWiseConsistency
 # from metrics import PointWiseConsistency, PointWiseCorrectness
 # from dataloaders import FetchDocuments
 # from utils.perturbations import MaskingPerturbations
@@ -49,5 +49,8 @@ print(f"ranked_lists : {ranked_lists}")
 termVisualization = TermVisualization()
 termVisualization.visualize(explanation_vectors[0]["term_vector"], show_top=5)
 
-pointWiseConsistency = PointWiseCorrectness(explainer)
-pointWiseConsistency.evaluate(query_id = '1112341', doc_id = '8139258', explanation_vector = explanation_vectors[0]["term_vector"])
+pointWiseCorrectness = PointWiseCorrectness(explainer)
+pointWiseCorrectness.evaluate(query_id = '1112341', doc_id = '8139258', explanation_vector = explanation_vectors[0]["term_vector"])
+
+pointWiseConsistency = PointWiseConsistency(explainer)
+pointWiseConsistency.evaluate(query_id = '1112341', doc_id = '8139258', explanation_vector = ranked_lists)
