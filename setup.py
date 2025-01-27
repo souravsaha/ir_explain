@@ -12,7 +12,8 @@ setup(
         'ipython==8.12.3',
         'matplotlib==3.9.4',
         'nltk==3.9.1',
-        'numpy==2.0.2',
+        #'numpy==2.0.2',
+        'numpy==1.24.4',
         'pandas==2.2.3',
         'rank_bm25==0.2.2',
         'scikit_learn==1.6.0',
@@ -21,7 +22,8 @@ setup(
         'scikit-image',
         'torch==2.5.1',
         'ir_dataset',
-        'tqdm==4.67.1'
+        'tqdm==4.67.1',
+        'pyserini==0.21.0'
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
