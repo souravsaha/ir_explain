@@ -17,11 +17,11 @@ setup(
         'pandas==2.2.3',
         'rank_bm25==0.2.2',
         'scikit_learn==1.6.0',
-        'scipy==1.14.1',
+        'scipy==1.13.1',
         'sentence_transformers==3.3.1',
         'scikit-image',
         'torch==2.5.1',
-        'ir_dataset',
+        'ir_datasets',
         'tqdm==4.67.1',
         'pyserini==0.21.0'
     ],
