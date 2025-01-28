@@ -3,6 +3,7 @@ from utils.pairwise_utils import *
 from utils.priority_queue import DualPriorityQueue
 from utils.similarity_measures import *
 from utils.rbo import RankingSimilarity 
+from utils.utility import load_from_res
 __all__ = [
     "PerturbDocument",
     "calculate_wup_similarity",
@@ -15,5 +16,6 @@ __all__ = [
     "union",
     "intersection",
     "compute_jaccard",
-    "RankingSimilarity"
+    "RankingSimilarity",
+    "load_from_res"
 ]

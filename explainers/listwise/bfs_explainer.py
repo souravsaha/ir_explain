@@ -45,7 +45,7 @@ class BFSListwiseExplainer(BaseListwiseExplainer):
         #print(dr_list)
 
         if self.correlation_measure == "RBO":
-            score = rbo.RankingSimilarity(bm25_list, dr_list).rbo(p = 0.9)
+            score = RankingSimilarity(bm25_list, dr_list).rbo(p = 0.9)
 
         # TODO : Problematic
         elif self.correlation_measure == "KENDALL":
