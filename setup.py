@@ -17,13 +17,16 @@ setup(
         'pandas==2.2.3',
         'rank_bm25==0.2.2',
         'scikit_learn==1.6.0',
-        'scipy==1.13.1',
+        'scipy==1.10.1',
         'sentence_transformers==3.3.1',
         'scikit-image',
-        'torch==2.5.1',
+        'torch==2.2.0',
         'ir_datasets',
         'tqdm==4.67.1',
-        'pyserini==0.21.0'
+        'pyserini==0.21.0',
+        'gensim==4.3.1',
+        'torchtext==0.17.0',
+        'h5py'
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
