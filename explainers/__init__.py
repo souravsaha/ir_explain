@@ -7,6 +7,7 @@ from explainers.pairwise.axioms import PairwiseAxiomaticExplainer
 from explainers.pairwise.explain_more import ExplainMore
 from explainers.listwise.bfs_explainer import BFSListwiseExplainer
 from explainers.listwise.greedy_explainer import GreedyListwiseExplainer
+from explainers.listwise.intent_exs_explainer import IntentListwiseExplainer
 
 __all__ = [
     "LirmePointwiseExplainer",
@@ -17,5 +18,6 @@ __all__ = [
     "PairwiseAxiomaticExplainer",
     "ExplainMore",
     "BFSListwiseExplainer",
-    "GreedyListwiseExplainer"
+    "GreedyListwiseExplainer",
+    "IntentListwiseExplainer"
 ]
