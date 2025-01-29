@@ -1,6 +1,7 @@
 from explainers import BFSListwiseExplainer
 from explainers import GreedyListwiseExplainer
 from explainers import IntentListwiseExplainer
+from explainers import MultiplexListwiseExplainer
 from pyserini.search.lucene import LuceneSearcher
 from pyserini.analysis import Analyzer, get_lucene_analyzer
 from utils.utility import load_from_res
@@ -97,29 +98,93 @@ dense_score_list = dense_scores['1112341']
 # # call Greedy explainer module
 # print(greedy.explain(query_id, query_str, term_weight_list, searcher, dense_ranking, debug = False))
 
-searcher = LuceneSearcher(index_path)
-# for the top k documents fetch their contents
-docs = dict([(hit, json.loads(searcher.doc(hit).raw())['contents']) for hit in dense_ranking_list[:20]])
+# searcher = LuceneSearcher(index_path)
+# # for the top k documents fetch their contents
+# docs = dict([(hit, json.loads(searcher.doc(hit).raw())['contents']) for hit in dense_ranking_list[:20]])
 
-# Load a reranking model
-model_name = "cross-encoder/ms-marco-electra-base"
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+# # Load a reranking model
+# model_name = "cross-encoder/ms-marco-electra-base"
+# device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-# model = load_your_model()
-reranker = CrossEncoder(model_name, max_length = 512, device = device)
+# # model = load_your_model()
+# reranker = CrossEncoder(model_name, max_length = 512, device = device)
 
-corpus = {'query': query_str,
-        'scores': dict([(doc_id, score) for doc_id, score in zip(dense_ranking_list[:20], dense_score_list[:20])]),
-        'docs': docs
+# corpus = {'query': query_str,
+#         'scores': dict([(doc_id, score) for doc_id, score in zip(dense_ranking_list[:20], dense_score_list[:20])]),
+#         'docs': docs
+#     }
+
+# # set parameters fro IntentEXS
+# params = {'top_idf': 200, 'topk': 20, 'max_pair': 100, 'max_intent': 20, 'style': 'random'}
+
+# # Init the IntentEXS object.
+# Intent = IntentListwiseExplainer(reranker, index_path, 'bm25')
+
+# # call explain method of IntentEXS
+# expansion = Intent.explain(corpus, params)
+
+# print(expansion)
+
+# set parameters for Multiplex
+params = {
+    "dataset" : "clueweb09",
+    "top_d" : 10,
+    "top_tfidf" : 100,
+    "top_r" : 50,
+    "candi_method" : "bm25",
+    "ranked" : 5,
+    "pair_num" : 20,
+    "max_k" : 10,
+    "min_k" : 4,
+    "candidates_num" : 20,
+    "style" : "random",
+    "vote" : 1,
+    "tolerance" : .005,
+    "EXP_model" : "language_model",
+    "optimize_method" : "geno",
+    "mode" : "candidates"
     }
+# pass the topk file
+params ["top_file"] = "/a/administrator/codebase/neural-ir/RankingExplanation_bkp/Datasets/src/clueweb09/top.tsv"
+# pass the query file
+params ["queries_file"] = "/a/administrator/codebase/neural-ir/RankingExplanation_bkp/Datasets/src/clueweb09/queries.tsv"
 
-# set parameters fro IntentEXS
-params = {'top_idf': 200, 'topk': 20, 'max_pair': 100, 'max_intent': 20, 'style': 'random'}
+# one can fetch query and query id from ir_datasets (https://ir-datasets.com/)
+query_str = 'lps laws definition'
+qid = '443396'
 
-# Init the IntentEXS object.
-Intent = IntentListwiseExplainer(reranker, index_path, 'bm25')
+# provide res file path of the blackbox ranker
+res_file_path = "/disk_a/junk/explain/ir_explain/runs/NRMs/ANCE.2019.res"
 
-# call explain method of IntentEXS
-expansion = Intent.explain(corpus, params)
+# MSMARCO index path:
+# one can download it from pyserini
+index_path = "/disk_a/junk/msmarco-v1-passage-full"
 
-print(expansion)
+# load dense ranking result and scores
+dense_ranking, dense_scores = load_from_res(res_file_path)
+
+dense_ranking_list = dense_ranking['443396']
+dense_score_list = dense_scores['443396']
+
+params["dense_ranking"] = dense_ranking_list
+params["dense_ranking_score"] = dense_score_list
+
+# initialize the Multiplex class
+multi = MultiplexListwiseExplainer(index_path)
+params["EXP_model"] = "multi"
+params["optimize_method"] = "geno_multi"
+
+# call Multiplex explainer module
+multi.explain(qid, query_str, params)
+
+# DEBUG/EXPLAIN Multiplex with additional details
+# e.g., 1) generate_candidates, 2) show_matrix
+multi.generate_candidates(qid, query_str, params)
+
+#multi.generate_doc_pairs(qid, query_str, params)
+# show matrix for any simple explainer. For that, you need to change the parameters to one of the following:
+# 1. language_model 
+# 2. saliency
+# 3. semantic
+params["EXP_model"] = "language_model"
+multi.show_matrix(qid, query_str, params)
