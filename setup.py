@@ -26,7 +26,11 @@ setup(
         'pyserini==0.21.0',
         'gensim==4.3.1',
         'torchtext==0.17.0',
-        'h5py'
+        'h5py',
+        'captum==0.7.0',
+        'genosolver==0.1.0.6',
+        'cvxpy==1.3.2',
+        'pytorch-lightning'
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
