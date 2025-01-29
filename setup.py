@@ -30,7 +30,8 @@ setup(
         'captum==0.7.0',
         'genosolver==0.1.0.6',
         'cvxpy==1.3.2',
-        'pytorch-lightning'
+        'pytorch-lightning',
+        'faiss-cpu==1.8.0'
     ],
     classifiers=[
         'Development Status :: 4 - Beta',
