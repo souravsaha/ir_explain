@@ -1,5 +1,5 @@
 from explainers.base_explainer import BaseExplainer
-import math
+import math, nltk
 from rank_bm25 import BM25Okapi
 
 class BasePointwiseExplainer(BaseExplainer):
@@ -27,7 +27,7 @@ class BasePointwiseExplainer(BaseExplainer):
         if self.indexer_type == "no-index":
             # print(corpus)
             bm25 = BM25Okapi(corpus)
-            doc = doc.split(' ')
+            doc = nltk.word_tokenize(doc)
             doc = [term.lower() for term in doc]
             doc = list(set(doc))
             # TODO: maybe could remove stopwords and periods
