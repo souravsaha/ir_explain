@@ -11,8 +11,12 @@ conda create -n irx python=3.9
 ```
 pip install .
 ```
-Note that for now we have tested irx on Python 3.9, we will test on newer versions of Python soon and update.
+Note that for now we have tested irx on Python 3.9 and Java 11. we will test on newer versions of Python soon and update.
 
+Before running the irx library, set the JAVA HOME as follows (replace the path appropriately):
+```
+JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64/"
+```
 
 ## Usage
 
