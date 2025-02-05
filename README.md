@@ -15,7 +15,7 @@ Note that for now we have tested irx on Python 3.9 and Java 11. we will test on 
 
 Before running the irx library, set the JAVA HOME as follows (replace the path appropriately):
 ```
-JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64/"
+export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64/"
 ```
 
 ## Usage
