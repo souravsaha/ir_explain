@@ -3,7 +3,8 @@ import numpy as np
 from explainers.pointwise.lime import lime_ranker
 from utils.perturb import PerturbDocument
 import pandas as pd
-import operator
+import operator, json
+from pyserini.search.lucene import LuceneSearcher
 
 class LirmePointwiseExplainer(BasePointwiseExplainer):
 	def __init__(self, model, corpus_path, indexer_type):
@@ -12,10 +13,13 @@ class LirmePointwiseExplainer(BasePointwiseExplainer):
 		self.corpus_path = corpus_path
 		self.indexer_type = indexer_type
 		self.corpus = None
-	
+		self.searcher = None
+
 		if self.indexer_type == "no-index":
 			self.corpus = self.preprocess(corpus_path)
 			print(f"length of corpus : {len(self.corpus)}")
+		elif self.indexer_type == "pyserini":
+			self.searcher = LuceneSearcher(self.corpus_path)
 	
 	def preprocess(self, corpus_path):
 		r"""
@@ -110,6 +114,10 @@ class LirmePointwiseExplainer(BasePointwiseExplainer):
 
 		document_vectors = self.get_document_vector(doc, self.corpus)
 		
+		if self.indexer_type == "pyserini":
+			doc_object = self.searcher.doc(doc)
+			doc = json.loads(doc_object.raw())['contents']
+
 		ranker_explanation = lime_ranker.LimeRankerExplainer(kernel_width = np.sqrt(100000) * .80,\
 										  random_state=123456, verbose=False, relevance_labels=[0, 1, 2, 3])
 		

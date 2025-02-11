@@ -16,9 +16,11 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 model = CrossEncoder(model_name, max_length = 512, device = device)
 
 # create an explainer 
-explainer = LirmePointwiseExplainer(model, corpus_path = "/disk_a/junk/data/small-collection.tsv", indexer_type= "no-index")
+# explainer = LirmePointwiseExplainer(model, corpus_path = "/disk_a/junk/data/small-collection.tsv", indexer_type= "no-index")
+# explainer = LirmePointwiseExplainer(model, corpus_path = "/disk_a/junk/msmarco-v1-passage-full", indexer_type= "pyserini")
 
-explainer = EXSPointwiseExplainer(model, corpus_path = "/disk_a/junk/data/small-collection.tsv", indexer_type= "no-index", exs_model = 'svm', num_samples = 100)
+# explainer = EXSPointwiseExplainer(model, corpus_path = "/disk_a/junk/data/small-collection.tsv", indexer_type= "no-index", exs_model = 'svm', num_samples = 100)
+explainer = EXSPointwiseExplainer(model, corpus_path = "/disk_a/junk/msmarco-v1-passage-full", indexer_type= "pyserini", exs_model = 'svm', num_samples = 100)
 
 # Explain a prediction 
 input_q = "what is the daily life of thai people"
@@ -37,7 +39,8 @@ params = {
     "rerank_scores" : [9.7950637e-01, 1.9957299e-05, 2.2687145e-05, 9.8405325e-01, 9.8600733e-01, 3.4078690e-05, 4.0367260e-04, 5.9412047e-05, 3.2782576e-05, 5.1955116e-04], 
     "rank" : 2
 }
-
+# added for pyserini
+# input_d = '8139258' 
 # explanation_vectors, ranked_lists = explainer.explain(input_q, input_d, params)
 
 # Assuming you have information about top k retrieved list
@@ -65,6 +68,6 @@ pointWiseCorrectness.evaluate(query_id = '1112341', doc_id = '8139258', explanat
 
 pointWiseConsistency = PointWiseConsistency(explainer)
 # Please note that for EXS pointwise consistency does not make sense, as we are not generating any explanations 
-# for similar rangs, in LIRME "kernel_range" : [5,10] -> we are generating explanation vectors for these two 
+# for similar ranges, in LIRME "kernel_range" : [5,10] -> we are generating explanation vectors for these two 
 # kernel_ranges 
 pointWiseConsistency.evaluate(query_id = '1112341', doc_id = '8139258', explanation_vector = ranked_lists)

@@ -7,6 +7,8 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from typing import Tuple, List, Union, Dict
 from nltk.corpus import stopwords
 STOP = stopwords.words('english')
+from pyserini.search.lucene import LuceneSearcher
+import json
 
 class EXSPointwiseExplainer(BasePointwiseExplainer):
 	"""
@@ -27,6 +29,7 @@ class EXSPointwiseExplainer(BasePointwiseExplainer):
 		self.corpus_path = corpus_path
 		self.indexer_type = indexer_type
 		self.corpus = None
+		self.searcher = None
 
 		self.num_samples = num_samples
 		self.batch_size = batch_size
@@ -38,7 +41,9 @@ class EXSPointwiseExplainer(BasePointwiseExplainer):
 			print(f"corpus path: {self.corpus_path}")
 			self.corpus = self.preprocess(corpus_path)
 			print(f"length of corpus : {len(self.corpus)}")
-		
+		elif self.indexer_type == "pyserini":
+			self.searcher = LuceneSearcher(self.corpus_path)
+
 	def _set_exs_model(self, exs_model: str, method: str, seed: int=10) -> None:
 		""" Update the surrogate model."""
 		if exs_model == 'lr':
@@ -186,8 +191,10 @@ class EXSPointwiseExplainer(BasePointwiseExplainer):
 			print("***********DEBUG****************")
 
 			vectors, coef = self.explain_single(query, (doc_rank, doc_exp), scores_topk, method, seed)
-			
-			document_vectors = self.get_document_vector(doc_exp['contents'], self.corpus)
+			if self.indexer_type == "pyserini":
+				document_vectors = self.get_document_vector(doc_exp['id'], self.corpus)
+			elif self.indexer_type == "no-indexer":	
+				document_vectors = self.get_document_vector(doc_exp['contents'], self.corpus)
 			word_list = list(document_vectors.keys())
 
 			term_weight_list = []
