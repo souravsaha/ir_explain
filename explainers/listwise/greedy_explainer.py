@@ -10,8 +10,11 @@ from utils import similarity_measures
 from explainers.listwise.base_listwise import BaseListwiseExplainer
 
 class GreedyListwiseExplainer(BaseListwiseExplainer):
-
-    def __init__(self, index_path : str, exp_model: str, hparams: Dict[str, Any] ) -> None:
+    """
+    Implementation of the Greedy algorithm
+    Paper link: https://dl.acm.org/doi/abs/10.1145/3539618.3591982
+    """
+    def __init__(self, index_path : str, indexer_type: str, exp_model: str, hparams: Dict[str, Any] ) -> None:
     
         self.indexer = IndexReader(index_path)
 
@@ -20,7 +23,8 @@ class GreedyListwiseExplainer(BaseListwiseExplainer):
         self.greedy_max_depth =  hparams['GREEDY_MAX_DEPTH']        
         self.bfs_top_docs =  hparams['BFS_TOP_DOCS']
         self.correlation_measure = hparams['CORRELATION_MEASURE']
-
+        # as of now this is dummy, we do not process anything
+        self.indexer_type = indexer_type
         if exp_model.lower() == 'bm25':
             pass
             

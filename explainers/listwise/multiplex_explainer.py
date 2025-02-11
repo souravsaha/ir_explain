@@ -626,8 +626,10 @@ class MultiplexListwiseExplainer(BaseListwiseExplainer):
     #    gen_candidates(hparams)
     #    gen_matrix(vars(args))
     
-    def __init__(self, index_path):
+    def __init__(self, index_path, indexer_type):
         self.index_path = index_path
+        # as of now this is dummy, we do not process anything
+        self.indexer_type = indexer_type
 
     def _evaluate(self, qid, query_tokens, candidates_tokens, doc_pairs, explainer, hparams: Dict[str, Any]):
         """ Evaluate kendalltau scores of expansion terms. """

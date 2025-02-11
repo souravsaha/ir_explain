@@ -12,9 +12,9 @@ from explainers.listwise.base_listwise import BaseListwiseExplainer
 class BFSListwiseExplainer(BaseListwiseExplainer):
     """
     Implementation of the BFS algorithm
-    Paper link : 
+    Paper link : https://dl.acm.org/doi/abs/10.1145/3539618.3591982
     """
-    def __init__(self, index_path : str, exp_model: str, hparams: Dict[str, Any] ) -> None:
+    def __init__(self, index_path : str, indexer_type: str, exp_model: str, hparams: Dict[str, Any] ) -> None:
         self.indexer = IndexReader(index_path)
 
         self.queue_max_depth =  hparams['QUEUE_MAX_DEPTH']
@@ -23,7 +23,8 @@ class BFSListwiseExplainer(BaseListwiseExplainer):
         self.bfs_max_depth =  hparams['BFS_MAX_DEPTH']
         self.bfs_top_docs =  hparams['BFS_TOP_DOCS']
         self.correlation_measure = hparams['CORRELATION_MEASURE']
-
+        # as of now this is dummy, we do not process anything
+        self.indexer_type = indexer_type
         if exp_model.lower() == 'bm25':
             pass
     

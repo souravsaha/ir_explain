@@ -25,12 +25,13 @@ class IntentListwiseExplainer(BaseListwiseExplainer):
 
     Paper reference : https://dl.acm.org/doi/pdf/10.1145/3351095.3375234
     """
-    def __init__(self, ranker: Callable, index_path: str, exp_model: str, seed: int=10) -> None:
+    def __init__(self, ranker: Callable, index_path: str, indexer_type: str, exp_model: str, seed: int=10) -> None:
         """ Init the ranking model to be explained, a pre-computed index, a simple explaination model, only support BM25."""
         self.ranker = ranker
         # TODO: what if the indexing is done with pyterrier
         self.indexer = IndexReader(index_path)  # init with a pre-computed index.
-    
+        # as of now this is dummy, we do not process anything
+        self.indexer_type = indexer_type
         # TODO : support for other statistical models like LMJM, LMDIR, ...
         if exp_model.lower() == 'bm25':
             self.exp_model = self._bm25_model
