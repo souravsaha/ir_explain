@@ -82,11 +82,11 @@ class PairwiseAxiomaticExplainer(BaseExplainer):
         self.doc2 = doc2
         self.index_path = index_path
 
-  def explain(self, query, doc1, doc2, axiom_classes):
-        results = {'Query': query, 'Document 1': doc1[:25] + '...', 'Document 2': doc2[:25] + '...'}
+  def explain(self, axiom_classes):
+        results = {'Query': self.query, 'Document 1': self.doc1[:25] + '...', 'Document 2': self.doc2[:25] + '...'}
 
         for axiom in axiom_classes:
-            combined_score = axiom.compare(query, doc1, doc2)
+            combined_score = axiom.compare(self.query, self.doc1, self.doc2)
 
             if combined_score > 0:
                 result = 1
@@ -100,11 +100,10 @@ class PairwiseAxiomaticExplainer(BaseExplainer):
         df = pd.DataFrame([results])
         return df
 
-  def explain_details(self, query, doc1, doc2, axiom_name):
-        self.index_path
+  def explain_details(self, axiom_name):
         axiom_class = getattr(ExplainMore, axiom_name, None)
         if axiom_class:
-            explanation_df = axiom_class.explain(query, doc1, doc2, self.index_path)
+            explanation_df = axiom_class.explain(self.query, self.doc1, self.doc2, self.index_path)
             return explanation_df
         else:
             return "Axiom not found in explain_more class"
@@ -135,13 +134,13 @@ class PairwiseAxiomaticExplainer(BaseExplainer):
 
   class TFC1(Axiom):
 
-    def compare(self,query, document1, document2):
+    def compare(self, query, document1, document2):
 
         if abs(len(document1) - len(document2)) >= 0.1 * max(len(document1),len(document2)):
-          return 0
+            return 0
 
         def term_frequency(term, document):
-          return document.split().count(term)
+            return document.split().count(term)
 
         query_terms = query.split()
 
@@ -356,7 +355,7 @@ class PairwiseAxiomaticExplainer(BaseExplainer):
 
   class PROX2(Axiom):
 
-    def compare(self,query, document1, document2):
+    def compare(self, query, document1, document2):
       query_words = query.split()
 
       if not all(word in document1 for word in query_words) or not all(word in document2 for word in query_words):
