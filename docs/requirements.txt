@@ -11,12 +11,6 @@ sentence_transformers==3.3.1
 scikit-image
 torch==2.2.0
 ir_datasets
-
-
-
-setuptools==75.1.0
-skimage==0.0
-torch==2.5.1
 tqdm==4.67.1
 pyserini==0.21.0
 gensim==4.3.1
