@@ -128,15 +128,17 @@ class IntentListwiseExplainer(BaseListwiseExplainer):
 
 
     def explain(self, corpus: Dict[str, Any], params: Dict[str, Union[int, str]]) -> List[str]:
-        """ A pipeline including candidates, matrix generation, and extract intent using greedy algorithm.
+        """ 
+        A pipeline including candidates, matrix generation, and extract intent using greedy algorithm.
+        
             Args:
                 corpus: dict-type input data, must have query, scores, docs domains. 
                         e.g. {'query': xxx, 'scores': {'doc_id': score}, 'docs': {'doc': doc_text}}.
                 params: necessary parameters needed for candidates gen, matrix gen... 
                         e.g. {'top_idf': 10, 'topk': 5, 'max_pair': 100, 'max_intent': 10}
-            Return:
+            
+            Returns:
                 A list of terms/words/tokens, used as expansion/intent/explanation.
-        
         """
         # descending order e document id gulo sorted in doc_ids  
         doc_ids = [score[0] for score in sorted(corpus['scores'].items(), key=lambda item: item[1], reverse=True) ] # sorted in descending order.
