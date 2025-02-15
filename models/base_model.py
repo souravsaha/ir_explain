@@ -23,12 +23,17 @@ ValTestBatch = Tuple[torch.IntTensor, torch.IntTensor, InputBatch, torch.IntTens
 
 
 class BaseRanker(LightningModule, abc.ABC):
-    """Abstract base class for re-rankers. Implements average precision and reciprocal rank validation.
+    """
+    Abstract base class for re-rankers. Implements average precision and reciprocal rank validation.
+    
     This class needs to be extended and (at least) the following methods must be implemented:
-        * forward
-        * configure_optimizers
+    
+    - forward
+    - configure_optimizers
+    
     Since this class uses custom sampling in DDP mode, the `Trainer` object must be initialized using
     `replace_sampler_ddp=False` and the argument `uses_ddp=True` must be set when DDP is active.
+    
     Args:
         hparams (Dict[str, Any]): All model hyperparameters
         train_ds (Union[PointwiseTrainDatasetBase, PairwiseTrainDatasetBase]): The training dataset

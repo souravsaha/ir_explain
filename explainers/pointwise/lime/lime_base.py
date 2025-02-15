@@ -129,19 +129,21 @@ class LimeBase(object):
             label: label for which we want an explanation
             num_features: maximum number of features in explanation
             feature_selection: how to select num_features. options are:
-                'forward_selection': iteratively add features to the model.
+
+                - 'forward_selection': iteratively add features to the model.
                     This is costly when num_features is high
-                'highest_weights': selects the features that have the highest
+                - 'highest_weights': selects the features that have the highest
                     product of absolute weight * original data point when
                     learning with all the features
-                'lasso_path': chooses features based on the lasso
+                - 'lasso_path': chooses features based on the lasso
                     regularization path
-                'none': uses all features, ignores num_features
-                'auto': uses forward_selection if num_features <= 6, and
+                - 'none': uses all features, ignores num_features
+                - 'auto': uses forward_selection if num_features <= 6, and
                     'highest_weights' otherwise.
+
             model_regressor: sklearn regressor to use in explanation.
                 Defaults to Ridge regression if None. Must have
-                model_regressor.coef_ and 'sample_weight' as a parameter
+                `model_regressor.coef_` and 'sample_weight' as a parameter
                 to model_regressor.fit()
 
         Returns:

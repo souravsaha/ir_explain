@@ -112,6 +112,7 @@ class LimeRankerExplainer(object):
        The overall implementation of a ranker explanation is as follows:
        Required: Query, document
        Result: Explanation of the rank of the document with respect to a query.
+       
        Algorithm:
             1. Sample keywords from the document to form pseudo document
             2. Find the score of pseudo documents and train a model on the scores.

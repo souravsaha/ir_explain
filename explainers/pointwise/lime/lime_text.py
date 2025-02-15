@@ -147,11 +147,11 @@ class IndexedString(object):
         return len(self.inverse_vocab)
 
     def word(self, id_):
-        """Returns the word that corresponds to id_ (int)"""
+        """Returns the word that corresponds to `id_` (int)"""
         return self.inverse_vocab[id_]
 
     def string_position(self, id_):
-        """Returns a np array with indices to id_ (int) occurrences"""
+        """Returns a np array with indices to `id_` (int) occurrences"""
         if self.bow:
             return self.string_start[self.positions[id_]]
         else:
@@ -252,11 +252,11 @@ class IndexedCharacters(object):
         return len(self.inverse_vocab)
 
     def word(self, id_):
-        """Returns the word that corresponds to id_ (int)"""
+        """Returns the word that corresponds to `id_` (int)"""
         return self.inverse_vocab[id_]
 
     def string_position(self, id_):
-        """Returns a np array with indices to id_ (int) occurrences"""
+        """Returns a np array with indices to `id_` (int) occurrences"""
         if self.bow:
             return self.string_start[self.positions[id_]]
         else:

@@ -156,6 +156,7 @@ class Explanation(object):
         """Returns the explanation as a pyplot figure.
 
         Will throw an error if you don't have matplotlib installed
+        
         Args:
             label: desired label. If you ask for a label for which an
                    explanation wasn't computed, will throw an exception.

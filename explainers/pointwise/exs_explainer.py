@@ -149,6 +149,7 @@ class EXSPointwiseExplainer(BasePointwiseExplainer):
 	def explain(self, query, doc_at_r, Method: Union[str, Dict[str, str]], params: Dict, seed: int=10) -> Dict[str, np.array]:
 		""" 
 		Explain the rank for a group of queries.
+		
 		Args:
 			corpus: the query-doc-rerank datasets. The format should follow:
 				{'query1': {'doc1': rel_score, 'doc2': rel_score2,...}, 'query2': {...}, ...}
