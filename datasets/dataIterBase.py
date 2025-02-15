@@ -15,7 +15,8 @@ ValTestInput = Tuple[int, int, Input, int]
 
 
 class PointwiseTrainDatasetBase(Dataset, abc.ABC):
-    """Abstract base class for pointwise training datasets. Methods to be implemented:
+    """
+    Abstract base class for pointwise training datasets. Methods to be implemented:
         * get_single_input
         * collate_fn (optional)
     Args:
@@ -31,7 +32,8 @@ class PointwiseTrainDatasetBase(Dataset, abc.ABC):
 
     @abc.abstractmethod
     def get_single_input(self, query: str, doc: str) -> Input:
-        """Create a single model input from a query and a document.
+        """
+        Create a single model input from a query and a document.
         Args:
             query (str): The query
             doc (str): The document
@@ -83,10 +85,12 @@ class PairwiseTrainDatasetBase(Dataset, abc.ABC):
 
     @abc.abstractmethod
     def get_single_input(self, query: str, doc: str) -> Input:
-        """Create a single model input from a query and a document.
+        """
+        Create a single model input from a query and a document.
         Args:
             query (str): The query
             doc (str): The document
+        
         Returns:
             Input: The model input
         """

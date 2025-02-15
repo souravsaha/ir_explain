@@ -66,20 +66,25 @@ def read_top_trec(fname: Path) -> Dict[int, Set[str]]:
 
 
 class TREC(ParsableDataset):
-    """Generic TREC ranking dataset class.
+    """
+    Generic TREC ranking dataset class.
+    
     The directory must contain the following file structure:
-        * queries.tsv -- queries, TREC format (tab separated)
-        * documents.tsv -- documents, TREC format (tab separated)
-        * qrels.tsv -- QRels, TREC format (space or tab separated)
-        * top.tsv -- Top retrieved documents for each query (to be re-ranked), TREC format (space or tab separated)
-        * folds -- directory
-            * fold_0 -- directory
-                * train_ids.txt -- training query IDs, one per line
-                * val_ids.txt -- validation query IDs, one per line
-                * test_ids.txt -- test query IDs, one per line
-            * fold_1
-                * ...
-            * ...
+    - queries.tsv -- queries, TREC format (tab separated)
+    - documents.tsv -- documents, TREC format (tab separated)
+    - qrels.tsv -- QRels, TREC format (space or tab separated)
+    - top.tsv -- Top retrieved documents for each query (to be re-ranked), TREC format (space or tab separated)
+    - folds -- directory
+
+        - fold_0 -- directory
+
+            - train_ids.txt -- training query IDs, one per line
+            - val_ids.txt -- validation query IDs, one per line
+            - test_ids.txt -- test query IDs, one per line
+            
+        - fold_1
+            - ...
+        - ...
     """
     def get_queries(self) -> Dict[str, str]:
         """Return all queries.
