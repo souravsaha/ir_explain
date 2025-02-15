@@ -5,6 +5,10 @@ build:
   os: "ubuntu-22.04"
   tools:
     python: "3.9"
+    java: "11"
 python:
   install:
      - requirements: docs/requirements.txt
+build:
+  environment:
+    JAVA_HOME: "/usr/lib/jvm/java-11-openjdk-amd64"
