@@ -3,6 +3,23 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+Getting started with IRX
+========================
+IRX can be installed easily by cloning the repo. 
+.. code-block::
+
+   git clone https://github.com/souravsaha/irx.git
+
+We also recommend to create a new conda environment to use the toolkit.
+.. code-block::
+   
+   conda create -n irx python=3.9
+   pip install .
+
+Note that, IRX is built on top of Python 3.9 and Java 11. Other versions might work,
+but we a through testing for newer Python versions are in progress. 
+
+
 IR_Explain documentation
 ========================
 
