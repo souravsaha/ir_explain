@@ -1,13 +1,15 @@
-from explainers import BFSListwiseExplainer
-from explainers import GreedyListwiseExplainer
-from explainers import IntentListwiseExplainer
-from explainers import MultiplexListwiseExplainer
-from pyserini.search.lucene import LuceneSearcher
-from pyserini.analysis import Analyzer, get_lucene_analyzer
-from utils.utility import load_from_res
+import json
+
 import numpy as np
-import json, torch
-from sentence_transformers import CrossEncoder      
+import torch
+from ir_explain.explainers import (BFSListwiseExplainer,
+                                   GreedyListwiseExplainer,
+                                   IntentListwiseExplainer,
+                                   MultiplexListwiseExplainer)
+from ir_explain.utils.utility import load_from_res
+from pyserini.analysis import Analyzer, get_lucene_analyzer
+from pyserini.search.lucene import LuceneSearcher
+from sentence_transformers import CrossEncoder
 
 # one can fetch query and query id from ir_datasets (https://ir-datasets.com/) 
 query_str = "what is the daily life of thai people"

@@ -1,9 +1,11 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='irx',  # Replace with your project name
-    version='0.1.0',
+    name='ir_explain',  # Replace with your project name
+    version='0.1',
     description='A Python Library for Explainable IR methods',
+    long_description=open("README.md").read(),
+    long_description_content_type="text/markdown",
     author='Sourav Saha',
     author_email='souravsaha.juit@gmail.com',
     url='https://github.com/souravsaha/irx/',  # Replace with your project's URL

@@ -11,7 +11,7 @@ sys.path.insert(0, os.path.abspath('..'))
 os.environ["JAVA_HOME"] = "/usr/lib/jvm/java-11-openjdk-amd64"
 
 project = 'IR_Explain'
-copyright = '2025, Sourav Saha'
+copyright = '2025, Sourav Saha, Harsh Agarwal, Venkatesh V, Avishek Anand, Swastik Mohanty, Debapriyo Majumdar, Mandar Mitra.'
 author = 'Sourav Saha'
 release = '0.1'
 

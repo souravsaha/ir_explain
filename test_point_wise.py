@@ -1,12 +1,12 @@
-from explainers import LirmePointwiseExplainer
-from explainers import EXSPointwiseExplainer
-from visualize import TermVisualization
-from eval import PointWiseCorrectness, PointWiseConsistency
+import torch
+from ir_explain.eval import PointWiseConsistency, PointWiseCorrectness
+from ir_explain.explainers import (EXSPointwiseExplainer,
+                                   LirmePointwiseExplainer)
+from ir_explain.visualize import TermVisualization
 # from metrics import PointWiseConsistency, PointWiseCorrectness
 # from dataloaders import FetchDocuments
 # from utils.perturbations import MaskingPerturbations
-from sentence_transformers import CrossEncoder      
-import torch
+from sentence_transformers import CrossEncoder
 
 # Load your model from huggingface
 model_name = "cross-encoder/ms-marco-electra-base"
@@ -17,10 +17,10 @@ model = CrossEncoder(model_name, max_length = 512, device = device)
 
 # create an explainer 
 # explainer = LirmePointwiseExplainer(model, corpus_path = "/disk_a/junk/data/small-collection.tsv", indexer_type= "no-index")
-# explainer = LirmePointwiseExplainer(model, corpus_path = "/disk_a/junk/msmarco-v1-passage-full", indexer_type= "pyserini")
+explainer = LirmePointwiseExplainer(model, corpus_path = "/disk_a/junk/msmarco-v1-passage-full", indexer_type= "pyserini")
 
 # explainer = EXSPointwiseExplainer(model, corpus_path = "/disk_a/junk/data/small-collection.tsv", indexer_type= "no-index", exs_model = 'svm', num_samples = 100)
-explainer = EXSPointwiseExplainer(model, corpus_path = "/disk_a/junk/msmarco-v1-passage-full", indexer_type= "pyserini", exs_model = 'svm', num_samples = 100)
+# explainer = EXSPointwiseExplainer(model, corpus_path = "/disk_a/junk/msmarco-v1-passage-full", indexer_type= "pyserini", exs_model = 'svm', num_samples = 100)
 
 # Explain a prediction 
 input_q = "what is the daily life of thai people"
@@ -41,7 +41,7 @@ params = {
 }
 # added for pyserini
 # input_d = '8139258' 
-# explanation_vectors, ranked_lists = explainer.explain(input_q, input_d, params)
+explanation_vectors, ranked_lists = explainer.explain(input_q, input_d, params)
 
 # Assuming you have information about top k retrieved list
 # params = {
