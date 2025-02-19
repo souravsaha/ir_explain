@@ -8,7 +8,7 @@ setup(
     long_description_content_type="text/markdown",
     author='Sourav Saha',
     author_email='souravsaha.juit@gmail.com',
-    url='https://github.com/souravsaha/irx/',  # Replace with your project's URL
+    url='https://github.com/souravsaha/ir_explain/',  # Replace with your project's URL
     packages=find_packages(),  # Automatically find packages in your project
     install_requires=[
         'ipython==8.12.3',

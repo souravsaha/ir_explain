@@ -17,10 +17,10 @@ model = CrossEncoder(model_name, max_length = 512, device = device)
 
 # create an explainer 
 # explainer = LirmePointwiseExplainer(model, corpus_path = "/disk_a/junk/data/small-collection.tsv", indexer_type= "no-index")
-explainer = LirmePointwiseExplainer(model, corpus_path = "/disk_a/junk/msmarco-v1-passage-full", indexer_type= "pyserini")
+# explainer = LirmePointwiseExplainer(model, corpus_path = "/disk_a/junk/msmarco-v1-passage-full", indexer_type= "pyserini")
 
 # explainer = EXSPointwiseExplainer(model, corpus_path = "/disk_a/junk/data/small-collection.tsv", indexer_type= "no-index", exs_model = 'svm', num_samples = 100)
-# explainer = EXSPointwiseExplainer(model, corpus_path = "/disk_a/junk/msmarco-v1-passage-full", indexer_type= "pyserini", exs_model = 'svm', num_samples = 100)
+explainer = EXSPointwiseExplainer(model, corpus_path = "/disk_a/junk/msmarco-v1-passage-full", indexer_type= "pyserini", exs_model = 'svm', num_samples = 100)
 
 # Explain a prediction 
 input_q = "what is the daily life of thai people"
@@ -41,7 +41,7 @@ params = {
 }
 # added for pyserini
 # input_d = '8139258' 
-explanation_vectors, ranked_lists = explainer.explain(input_q, input_d, params)
+# explanation_vectors, ranked_lists = explainer.explain(input_q, input_d, params)
 
 # Assuming you have information about top k retrieved list
 # params = {

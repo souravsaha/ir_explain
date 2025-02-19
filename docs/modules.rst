@@ -1,5 +1,5 @@
-irx
-===
+ir_explain
+==========
 
 .. toctree::
    :maxdepth: 4

@@ -1,19 +1,19 @@
-# irx
+# ir_explain
 
 ## Installing requirements
 
 ```
-git clone https://github.com/souravsaha/irx.git
+git clone https://github.com/souravsaha/ir_explain.git
 ```
 ```
-conda create -n irx python=3.9
+conda create -n ir_explain python=3.9
 ```
 ```
 pip install .
 ```
-Note that for now we have tested irx on Python 3.9 and Java 11. we will test on newer versions of Python soon and update.
+Note that for now we have tested ir_explain on Python 3.9 and Java 11. we will test on newer versions of Python soon and update.
 
-Before running the irx library, set the JAVA HOME as follows (replace the path appropriately):
+Before running the ir_explain library, set the JAVA HOME as follows (replace the path appropriately):
 ```
 export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64/"
 ```
@@ -24,7 +24,7 @@ As of now, we have established a single pipeline with pointwise component.
 
 ### To get started 
 
-You can run the program test_point_wise.py to get the pipeline. 
+You can run the programs test_point_wise.py, test_pair_wise.py, and test_list_wise.py to get the pipeline. 
 
 ## Contributing
 
