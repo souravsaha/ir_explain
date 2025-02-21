@@ -17,7 +17,7 @@ query_id = '1112341'
 
 
 # provide res file path of the blackbox ranker
-res_file_path = "/disk_a/junk/explain/ir_explain/runs/NRMs/ANCE.2019.res"
+res_file_path = "examples/runs/NRMs/ANCE.2019.res"
 
 # MSMARCO index path: 
 # one can download a pre-built index from pyserini
@@ -157,7 +157,7 @@ query_str = 'lps laws definition'
 qid = '443396'
 
 # provide res file path of the blackbox ranker
-res_file_path = "/disk_a/junk/explain/ir_explain/runs/NRMs/ANCE.2019.res"
+res_file_path = "examples/runs/NRMs/ANCE.2019.res"
 
 # MSMARCO index path:
 # one can download it from pyserini
