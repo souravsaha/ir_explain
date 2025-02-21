@@ -11,6 +11,12 @@ conda create -n ir_explain python=3.9
 ```
 pip install .
 ```
+## Install via PyPI:
+
+```
+pip3 install ir-explain
+```
+
 Note that for now we have tested ir_explain on Python 3.9 and Java 11. we will test on newer versions of Python soon and update.
 
 Before running the ir_explain library, set the JAVA HOME as follows (replace the path appropriately):
@@ -24,7 +30,7 @@ As of now, we have established a single pipeline with pointwise component.
 
 ### To get started 
 
-You can run the programs test_point_wise.py, test_pair_wise.py, and test_list_wise.py to get the pipeline. 
+You can run the programs test_point_wise.py, test_pair_wise.py, and test_list_wise.py to get the pipeline. Run files for some neural ranking models are available in the `examples/runs folder`. 
 
 ## Contributing
 
