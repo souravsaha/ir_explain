@@ -30,7 +30,7 @@ export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64/"
 You can run the programs test_point_wise.py, test_pair_wise.py, and test_list_wise.py to get the pipeline. Run files for some neural ranking models are available in the `examples/runs folder`. 
 
 ## Roadmap
-ir_explain is a open-source Python library for explaining IR methods. We will continute to update and add various explainable approaches. We also sincerely welcome contributions on this software. Our previous version of this toolkit can be found in https://github.com/souravsaha/ir_explain_old
+ir_explain is an open-source Python library for explaining IR methods. We will continue to update it and add various explainable approaches. We also sincerely welcome contributions to this software. Our previous version of this toolkit can be found at: https://github.com/souravsaha/ir_explain_old.
 
 - [x] Support for different Pointwise component
 - [x] Support for different Pairwise axiomatic component
