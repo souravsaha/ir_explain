@@ -27,7 +27,7 @@ export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64/"
 ```
 ### To get started 
 
-You can run the programs test_point_wise.py, test_pair_wise.py, and test_list_wise.py to get the pipeline. Run files for some neural ranking models are available in the `examples/runs folder`. 
+You can run the programs test_point_wise.py, test_pair_wise.py, and test_list_wise.py to get the pipeline. Run files for some neural ranking models are available in the `examples/runs folder`. A detailed notebook with various illustrations of ir_explain can be found in `examples/getting-started.ipynb`.
 
 ## Roadmap
 ir_explain is an open-source Python library for explaining IR methods. We will continue to update it and add various explainable approaches. We also sincerely welcome contributions to this software. Our previous version of this toolkit can be found at: https://github.com/souravsaha/ir_explain_old.
