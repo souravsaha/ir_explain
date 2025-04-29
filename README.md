@@ -32,14 +32,24 @@ You can run the programs test_point_wise.py, test_pair_wise.py, and test_list_wi
 ## Roadmap
 ir_explain is an open-source Python library for explaining IR methods. We will continue to update it and add various explainable approaches. We also sincerely welcome contributions to this software. Our previous version of this toolkit can be found at: https://github.com/souravsaha/ir_explain_old.
 
-- [x] Support for different Pointwise components
-- [x] Support for different Pairwise axiomatic components
+- [ ] PyTerrier integration.
+- [x] Support for different Pointwise components.
+- [x] Support for different Pairwise axiomatic components.
 - [x] Support for different Listwise components. Currently, four (BFS, Greedy, IntentEXS, Multiplex) state-of-the-art Listwise approaches have been added. 
 - [x] Support for different evaluation components.
 - [ ] Include an interpretable-by-design approach, SELECT-AND-RANK (https://dl.acm.org/doi/10.1145/3576924), which was published in TOIS 2023. 
 - [ ] Include Probing for Dual Encoders (https://dl.acm.org/doi/abs/10.1145/3627673.3679556), published in CIKM 2024.
 - [ ] Add more logging setup for better debugging.
 - [ ] Enhance code adaptability and readability.
+- [ ] Comprehensive documentation.
+
+
+## Action items derived from SIGIR 2025 reviews
+
+- [ ] The repository should contain a comprehensive guide on experimental configuration, available functions, datasets and interpreting the results.
+- [ ] By way of general background on ExIR, add pointers to (+ local copies) of surveys.
+- [ ] Add TL;DR versions of above surveys.
+
 
 ## Contributing
 
